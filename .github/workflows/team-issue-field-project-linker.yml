@@ -2,7 +2,7 @@ name: Log DTS Team issue type
 
 on:
   issues:
-    types: [field_added]
+    types: [field_added, field_deleted]
 
 jobs:
   log-dts-team:
