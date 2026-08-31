@@ -13,3 +13,16 @@ jobs:
         run: |
           echo 'Action: ${{ github.event.action }}'
           echo 'Value: ${{ github.event.issue_field_value.option.name }}'
+
+  add-to-dev-project:
+    if: >-
+      github.event.issue_field.name == 'DTS Team' &&
+      github.event.action == 'field_added' &&
+      github.event.issue_field_value.option.name == 'Dev'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Add issue to DTS Dev Team project
+        uses: actions/add-to-project@v1.0.2
+        with:
+          project-url: https://github.com/orgs/cityofaustin/projects/25
+          github-token: ${{ secrets.PROJECT_MANAGEMENT_PAT }}
