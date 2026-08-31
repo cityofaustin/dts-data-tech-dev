@@ -1,4 +1,4 @@
-name: Log DTS Team issue type
+name: Assign Project based on DTS Team issue field
 
 on:
   issues:
