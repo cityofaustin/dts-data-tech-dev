@@ -6,7 +6,7 @@ on:
 
 jobs:
   log-dts-team:
-    if: github.event.issue.type.name == 'DTS Team'
+    # if: github.event.issue.type.name == 'DTS Team'
     runs-on: ubuntu-latest
     steps:
       - name: Log full event payload
