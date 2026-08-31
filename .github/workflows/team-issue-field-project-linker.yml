@@ -10,4 +10,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Log DTS Team value
-        run: echo '${{ github.event.issue_field_value.option.name }}'
+        run: |
+          echo 'Action: ${{ github.event.action }}'
+          echo 'Value: ${{ github.event.issue_field_value.option.name }}'
