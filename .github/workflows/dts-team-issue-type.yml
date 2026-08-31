@@ -1,0 +1,13 @@
+name: Log DTS Team issue type
+
+on:
+  issues:
+    types: [field_added]
+
+jobs:
+  log-dts-team:
+    if: github.event.issue.type.name == 'DTS Team'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Log full event payload
+        run: echo '${{ toJSON(github.event) }}'
