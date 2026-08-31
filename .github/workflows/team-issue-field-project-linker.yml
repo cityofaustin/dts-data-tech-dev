@@ -6,8 +6,8 @@ on:
 
 jobs:
   log-dts-team:
-    # if: github.event.issue.type.name == 'DTS Team'
+    if: github.event.issue_field.name == 'DTS Team'
     runs-on: ubuntu-latest
     steps:
-      - name: Log full event payload
-        run: echo '${{ toJSON(github.event) }}'
+      - name: Log DTS Team value
+        run: echo '${{ github.event.issue_field_value.option.name }}'
