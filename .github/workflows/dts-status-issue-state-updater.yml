@@ -41,4 +41,4 @@ jobs:
               optionId: desiredOptionID
             });
 
-            console.log(`Updated issue #${issue.number} Status);
+            console.log(`Updated issue #${issue.number} Status`);
