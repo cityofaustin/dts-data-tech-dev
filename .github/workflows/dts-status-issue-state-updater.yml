@@ -13,7 +13,7 @@ jobs:
     steps:
       - name: Set Status issue field
         env:
-          GITHUB_TOKEN: ${{ secrets.PROJECT_MANAGEMENT_PAT }}
+          GITHUB_TOKEN: ${{ secrets.DTS_ISSUE_PROJECT_LINKER }}
           REPO: ${{ github.repository }}
           ISSUE_NUMBER: ${{ github.event.issue.number }}
           STATUS_FIELD_ID: 10226
