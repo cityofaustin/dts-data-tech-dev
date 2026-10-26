@@ -12,33 +12,26 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Update custom issue field
-        uses: actions/github-script@v7
-        with:
-          github-token: ${{ secrets.PROJECT_MANAGEMENT_PAT }}
-          script: |
-            const issue = context.payload.issue;
-            const statusFieldID = "IFSS_kgDNJ_I";
-            const closedOptionID = "IFSSO_kgDOBJ2T6g";
-            const newOptionID = "IFSSO_kgDNOPE";
-            const desiredOptionID = issue.state === "closed" ? closedOptionID : newOptionID;
+    steps:
+      - name: Set Status issue field
+        env:
+          GH_TOKEN: ${{ secrets.PROJECT_MANAGEMENT_PAT }}
+          REPO: ${{ github.repository }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+          STATUS_FIELD_ID: 10226
+          ACTION: ${{ github.event.action }}
+        run: |
+          if [ "$ACTION" = "closed" ]; then
+            VALUE="Closed"
+          else
+            VALUE="New"
+          fi
 
-            console.log(issue)
-
-            // Set the field value
-            await github.graphql(`
-              mutation($issueId: ID!, $fieldId: ID!, $optionId: String!) {
-                setIssueFieldValue(input: {
-                  issueId: $issueId
-                  fieldId: $fieldId
-                  value: { singleSelectOptionId: $optionId }
-                }) {
-                  clientMutationId
-                }
-              }
-            `, {
-              issueId: issue.node_id,
-              fieldId: statusFieldID,
-              optionId: desiredOptionID
-            });
-
-            console.log(`Updated issue #${issue.number} Status`);
+          gh api \
+            --method POST \
+            -H "Accept: application/vnd.github+json" \
+            -H "X-GitHub-Api-Version: 2026-03-10" \
+            "/repos/$REPO/issues/$ISSUE_NUMBER/issue-field-values" \
+            --input - <<EOF
+          {"issue_field_values":[{"field_id":$STATUS_FIELD_ID,"value":"$VALUE"}]}
+          EOF
