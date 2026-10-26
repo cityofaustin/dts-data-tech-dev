@@ -14,7 +14,7 @@ jobs:
       - name: Update custom issue field
         uses: actions/github-script@v7
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          github-token: ${{ secrets.PROJECT_MANAGEMENT_PAT }}
           script: |
             const issue = context.payload.issue;
             const statusFieldID = "IFSS_kgDNJ_I";
@@ -22,6 +22,7 @@ jobs:
             const newOptionID = "IFSSO_kgDNOPE";
             const desiredOptionID = issue.state === "closed" ? closedOptionID : newOptionID;
 
+            console.log(issue)
 
             // Set the field value
             await github.graphql(`
