@@ -11,8 +11,6 @@ jobs:
   update-status-field:
     runs-on: ubuntu-latest
     steps:
-      - name: Update custom issue field
-    steps:
       - name: Set Status issue field
         env:
           GH_TOKEN: ${{ secrets.PROJECT_MANAGEMENT_PAT }}
