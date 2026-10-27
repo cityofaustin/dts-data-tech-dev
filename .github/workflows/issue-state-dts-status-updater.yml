@@ -27,7 +27,7 @@ jobs:
           STATUS=$(gh api \
             -H "X-GitHub-Api-Version: 2026-03-10" \
             "/repos/$REPO/issues/$ISSUE_NUMBER/issue-field-values" \
-            --jq ".[] | select(.issue_field_id == $STATUS_FIELD_ID) | .value")
+            --jq ".[] | select(.issue_field_id == $STATUS_FIELD_ID) | .single_select_option.name")
 
           echo "Current Status: $STATUS"
 
