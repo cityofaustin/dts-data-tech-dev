@@ -18,7 +18,7 @@ jobs:
     steps:
       - name: Set Status issue field
         env:
-          GH_TOKEN: ${{ secrets.PROJECT_MANAGEMENT_PAT }}
+          GH_TOKEN: ${{ secrets.SERVICE_BOT_TOKEN }}
           REPO: ${{ github.repository }}
           ISSUE_NUMBER: ${{ github.event.issue.number }}
           STATUS_FIELD_ID: 10226
