@@ -17,6 +17,7 @@ jobs:
       github.event.issue_field.name == 'DTS Status'
     runs-on: ubuntu-latest
     timeout-minutes: 3
+    steps:
       - name: Close issue if DTS Status is closed
         env:
           GH_TOKEN: ${{ secrets.PROJECT_MANAGEMENT_PAT }}
