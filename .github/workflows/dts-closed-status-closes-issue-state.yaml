@@ -12,7 +12,7 @@ jobs:
     # skip issues that are already closed and skip runs triggered by the service bot
     if: github.event.issue.state == 'open' && github.actor != 'atdservicebot'
     runs-on: ubuntu-latest
-    timeout-minutes: 1
+    timeout-minutes: 3
     steps:
       - name: Close issue if DTS Status is closed
         env:
